@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <Corrade/Utility/Debug.h>
 
 int main() {
