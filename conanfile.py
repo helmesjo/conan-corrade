@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from conans import ConanFile, CMake, tools
+from conans.errors import ConanException
 import os
 
 
@@ -62,6 +63,10 @@ class LibnameConan(ConanFile):
         self.options.msvc2015_compatibility = self.settings.compiler == 'Visual Studio'
         self.options.msvc2017_compatibility = self.settings.compiler == 'Visual Studio'
 
+    def configure(self):
+        if self.settings.compiler == "Visual Studio" and self.settings.compiler.version < 14:
+            raise ConanException("{} requires Visual Studio version 14 or greater".format(self.name))
+
     def source(self):
         source_url = "https://github.com/mosra/corrade"
         tools.get("{0}/archive/v{1}.tar.gz".format(source_url, self.version))
@@ -84,8 +89,6 @@ class LibnameConan(ConanFile):
             add_cmake_option(attr, value)
 
         add_cmake_option("BUILD_STATIC", not self.options.shared)
-
-        self.output.info(cmake.definitions)
 
         cmake.configure(build_folder=self._build_subfolder)
 
