@@ -3,6 +3,13 @@ build: false
 environment:
     PYTHON: "C:\\Python37"
 
+    CONAN_USERNAME: "helmesjo"
+    CONAN_LOGIN_USERNAME: "helmesjo"
+    CONAN_CHANNEL: "stable" # because of bug in conan-package-tools, we always upload packages as stable
+    CONAN_UPLOAD: "https://api.bintray.com/conan/helmesjo/public-conan"
+    CONAN_REMOTES: "https://api.bintray.com/conan/helmesjo/public-conan,https://api.bintray.com/conan/bincrafters/public-conan"
+    CONAN_UPLOAD_ONLY_WHEN_STABLE: 0
+
     matrix:
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 12
