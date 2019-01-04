@@ -23,7 +23,7 @@ class LibnameConan(ConanFile):
     generators = "cmake"
 
     # Options may need to change depending on the packaged library.
-    settings = "os", "arch", "compiler", "build_type"
+    settings = "os", "arch", "compiler", "build_type", "cppstd"
     options = {
         "shared": [True, False], 
         "fPIC": [True, False],
@@ -66,6 +66,11 @@ class LibnameConan(ConanFile):
     def configure(self):
         if self.settings.compiler == "Visual Studio" and self.settings.compiler.version < 14:
             raise ConanException("{} requires Visual Studio version 14 or greater".format(self.name))
+
+        if not self.settings.cppstd:
+            self.settings.cppstd = 11
+        else:
+            self.output.info("NOTE: {} requires c++11 or greater".format(self.name))
 
     def source(self):
         source_url = "https://github.com/mosra/corrade"
