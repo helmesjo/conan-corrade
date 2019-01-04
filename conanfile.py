@@ -29,9 +29,6 @@ class LibnameConan(ConanFile):
         "fPIC": [True, False],
         "build_deprecated": [True, False],
         "build_tests": [True, False],
-        "gcc47_compatibility": [True, False],
-        "msvc2015_compatibility": [True, False],
-        "msvc2017_compatibility": [True, False],
         "with_interconnect": [True, False],
         "with_pluginmanager": [True, False],
         "with_testsuite": [True, False],
@@ -41,9 +38,6 @@ class LibnameConan(ConanFile):
         "fPIC": True,
         "build_deprecated": False,
         "build_tests": False,
-        "gcc47_compatibility": False,
-        "msvc2015_compatibility": False,
-        "msvc2017_compatibility": False,
         "with_interconnect": False,
         "with_pluginmanager": False,
         "with_testsuite": True,
@@ -59,9 +53,6 @@ class LibnameConan(ConanFile):
     def config_options(self):
         if self.settings.os == 'Windows':
             del self.options.fPIC
-
-        self.options.msvc2015_compatibility = self.settings.compiler == 'Visual Studio'
-        self.options.msvc2017_compatibility = self.settings.compiler == 'Visual Studio'
 
     def configure(self):
         if self.settings.compiler == "Visual Studio" and self.settings.compiler.version < 14:
@@ -94,6 +85,13 @@ class LibnameConan(ConanFile):
             add_cmake_option(attr, value)
 
         add_cmake_option("BUILD_STATIC", not self.options.shared)
+
+        if self.settings.compiler == 'Visual Studio':
+            add_cmake_option("MSVC2015_COMPATIBILITY", self.settings.compiler.version == 14)
+            add_cmake_option("MSVC2017_COMPATIBILITY", self.settings.compiler.version == 17)
+        
+        if self.settings.compiler == 'gcc':
+            add_cmake_option("GCC47_COMPATIBILITY", self.settings.compiler.version == 4.7)
 
         cmake.configure(build_folder=self._build_subfolder)
 
