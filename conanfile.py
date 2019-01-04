@@ -58,7 +58,7 @@ class LibnameConan(ConanFile):
             self.options.with_testsuite = True
 
     def configure(self):
-        if self.settings.compiler == 'Visual Studio' and int(self.settings.compiler.version) < 14:
+        if self.settings.compiler == 'Visual Studio' and int(self.settings.compiler.version.value) < 14:
             raise ConanException("{} requires Visual Studio version 14 or greater".format(self.name))
 
         # Corrad requires >= c++11
@@ -89,8 +89,8 @@ class LibnameConan(ConanFile):
         add_cmake_option("BUILD_STATIC", not self.options.shared)
 
         if self.settings.compiler == 'Visual Studio':
-            add_cmake_option("MSVC2015_COMPATIBILITY", int(self.settings.compiler.version) == 14)
-            add_cmake_option("MSVC2017_COMPATIBILITY", int(self.settings.compiler.version) == 17)
+            add_cmake_option("MSVC2015_COMPATIBILITY", int(self.settings.compiler.version.value) == 14)
+            add_cmake_option("MSVC2017_COMPATIBILITY", int(self.settings.compiler.version.value) == 17)
         
         if self.settings.compiler == 'gcc':
             add_cmake_option("GCC47_COMPATIBILITY", float(self.settings.compiler.version.value) < 4.8)
