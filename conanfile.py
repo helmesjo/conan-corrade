@@ -122,3 +122,6 @@ class LibnameConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
+
+        if self.options.build_deprecated:
+            self.cpp_info.defines.append("CORRADE_BUILD_DEPRECATED")
