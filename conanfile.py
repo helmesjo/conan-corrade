@@ -38,8 +38,8 @@ class LibnameConan(ConanFile):
         "fPIC": True,
         "build_deprecated": False,
         "build_tests": False,
-        "with_interconnect": False,
-        "with_pluginmanager": False,
+        "with_interconnect": True,
+        "with_pluginmanager": True,
         "with_testsuite": False,
     }
 
