@@ -54,8 +54,8 @@ class LibnameConan(ConanFile):
         if self.settings.os == 'Windows':
             del self.options.fPIC
 
-        if self.settings.build_tests:
-            self.settings.with_testsuite = True
+        if self.options.build_tests:
+            self.options.with_testsuite = True
 
     def configure(self):
         if self.settings.compiler == 'Visual Studio' and int(self.settings.compiler.version) < 14:
