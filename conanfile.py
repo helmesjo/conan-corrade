@@ -61,6 +61,10 @@ class LibnameConan(ConanFile):
         if self.settings.compiler == 'Visual Studio' and int(self.settings.compiler.version) < 14:
             raise ConanException("{} requires Visual Studio version 14 or greater".format(self.name))
 
+        # Corrad requires >= c++11
+        if self.settings.compiler != 'Visual Studio' and not self.settings.cppstd:
+            self.settings.cppstd = "gnu11"
+
     def source(self):
         source_url = "https://github.com/mosra/corrade"
         tools.get("{0}/archive/v{1}.tar.gz".format(source_url, self.version))
