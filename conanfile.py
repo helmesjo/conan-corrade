@@ -40,7 +40,7 @@ class LibnameConan(ConanFile):
         "build_tests": False,
         "with_interconnect": False,
         "with_pluginmanager": False,
-        "with_testsuite": True,
+        "with_testsuite": False,
     }
 
     # Custom attributes for Bincrafters recipe conventions
@@ -54,14 +54,12 @@ class LibnameConan(ConanFile):
         if self.settings.os == 'Windows':
             del self.options.fPIC
 
-    def configure(self):
-        if self.settings.compiler == "Visual Studio" and self.settings.compiler.version < 14:
-            raise ConanException("{} requires Visual Studio version 14 or greater".format(self.name))
+        if self.settings.build_tests:
+            self.settings.with_testsuite = True
 
-        if not self.settings.cppstd:
-            self.settings.cppstd = 11
-        else:
-            self.output.info("NOTE: {} requires c++11 or greater".format(self.name))
+    def configure(self):
+        if self.settings.compiler == 'Visual Studio' and int(self.settings.compiler.version) < 14:
+            raise ConanException("{} requires Visual Studio version 14 or greater".format(self.name))
 
     def source(self):
         source_url = "https://github.com/mosra/corrade"
@@ -87,11 +85,11 @@ class LibnameConan(ConanFile):
         add_cmake_option("BUILD_STATIC", not self.options.shared)
 
         if self.settings.compiler == 'Visual Studio':
-            add_cmake_option("MSVC2015_COMPATIBILITY", self.settings.compiler.version == 14)
-            add_cmake_option("MSVC2017_COMPATIBILITY", self.settings.compiler.version == 17)
+            add_cmake_option("MSVC2015_COMPATIBILITY", int(self.settings.compiler.version) == 14)
+            add_cmake_option("MSVC2017_COMPATIBILITY", int(self.settings.compiler.version) == 17)
         
         if self.settings.compiler == 'gcc':
-            add_cmake_option("GCC47_COMPATIBILITY", self.settings.compiler.version == 4.7)
+            add_cmake_option("GCC47_COMPATIBILITY", float(self.settings.compiler.version.value) < 4.8)
 
         cmake.configure(build_folder=self._build_subfolder)
 
