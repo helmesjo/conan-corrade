@@ -49,16 +49,13 @@ The following command both runs all the steps of the conan file, and publishes t
 ### Available Options
 | Option        | Default | Possible Values  |
 | ------------- |:----------------- |:------------:|
-| msvc2017_compatibility      | False |  [True, False] |
-| build_deprecated      | False |  [True, False] |
-| build_tests      | False |  [True, False] |
-| with_pluginmanager      | False |  [True, False] |
-| gcc47_compatibility      | False |  [True, False] |
 | shared      | False |  [True, False] |
 | fPIC      | True |  [True, False] |
+| build_deprecated      | False |  [True, False] |
+| build_tests      | False |  [True, False] |
+| with_interconnect      | True |  [True, False] |
+| with_pluginmanager      | True |  [True, False] |
 | with_testsuite      | True |  [True, False] |
-| msvc2015_compatibility      | False |  [True, False] |
-| with_interconnect      | False |  [True, False] |
 
 
 ## Add Remote

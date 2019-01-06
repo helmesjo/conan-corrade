@@ -41,7 +41,7 @@ class LibnameConan(ConanFile):
         "build_tests": False,
         "with_interconnect": True,
         "with_pluginmanager": True,
-        "with_testsuite": False,
+        "with_testsuite": True,
     }
 
     # Custom attributes for Bincrafters recipe conventions
