@@ -47,6 +47,8 @@ class LibnameConan(ConanFile):
         "build_tests": [True, False],
         "with_interconnect": [True, False],
         "with_pluginmanager": [True, False],
+        "with_utility": [True, False],
+        "with_rc": [True, False],
         "with_testsuite": [True, False],
     }
     default_options = {
@@ -56,6 +58,8 @@ class LibnameConan(ConanFile):
         "build_tests": False,
         "with_interconnect": True,
         "with_pluginmanager": True,
+        "with_utility": True,
+        "with_rc": True,
         "with_testsuite": True,
     }
 

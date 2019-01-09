@@ -1,5 +1,5 @@
 [![Download](https://api.bintray.com/packages/helmesjo/public-conan/corrade%3Ahelmesjo/images/download.svg) ](https://bintray.com/helmesjo/public-conan/corrade%3Ahelmesjo/_latestVersion)
-[![Build Status Travis](https://travis-ci.org/helmesjo/conan-corrade.svg?branch=stable%2F2018.10)](https://travis-ci.com/helmesjo/conan-corrade)
+[![Build Status Travis](https://travis-ci.com/helmesjo/conan-corrade.svg?branch=stable%2F2018.10)](https://travis-ci.com/helmesjo/conan-corrade)
 [![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/helmesjo/conan-corrade?branch=stable%2F2018.10&svg=true)](https://ci.appveyor.com/project/helmesjo/conan-corrade)
 
 ## Conan package recipe for [*corrade*](https://magnum.graphics/corrade)
@@ -53,9 +53,11 @@ The following command both runs all the steps of the conan file, and publishes t
 | fPIC      | True |  [True, False] |
 | build_deprecated      | False |  [True, False] |
 | build_tests      | False |  [True, False] |
-| with_interconnect      | True |  [True, False] |
+| with_rc      | True |  [True, False] |
+| with_utility      | True |  [True, False] |
 | with_pluginmanager      | True |  [True, False] |
 | with_testsuite      | True |  [True, False] |
+| with_interconnect      | True |  [True, False] |
 
 
 ## Add Remote
