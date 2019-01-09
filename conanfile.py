@@ -44,23 +44,21 @@ class LibnameConan(ConanFile):
         "shared": [True, False], 
         "fPIC": [True, False],
         "build_deprecated": [True, False],
-        "build_tests": [True, False],
         "with_interconnect": [True, False],
         "with_pluginmanager": [True, False],
-        "with_utility": [True, False],
         "with_rc": [True, False],
         "with_testsuite": [True, False],
+        "with_utility": [True, False],
     }
     default_options = {
         "shared": False, 
         "fPIC": True,
         "build_deprecated": True,
-        "build_tests": False,
         "with_interconnect": True,
         "with_pluginmanager": True,
-        "with_utility": True,
         "with_rc": True,
         "with_testsuite": True,
+        "with_utility": True,
     }
 
     # Custom attributes for Bincrafters recipe conventions
@@ -73,9 +71,6 @@ class LibnameConan(ConanFile):
     def config_options(self):
         if self.settings.os == 'Windows':
             del self.options.fPIC
-
-        if self.options.build_tests:
-            self.options.with_testsuite = True
 
     def configure(self):
         if self.settings.compiler == 'Visual Studio' and int(self.settings.compiler.version.value) < 14:
@@ -121,13 +116,6 @@ class LibnameConan(ConanFile):
     def build(self):
         cmake = self._configure_cmake()
         cmake.build()
-
-    # Fix later. Currently root contains no tests, and source_subfolder fails to run the test (can't find executables)
-#        if self.options.build_tests:
-            # self.output.info("Running {} tests".format(self.name))
-            # source_path = os.path.join(self._build_subfolder, self._source_subfolder)
-            # with tools.chdir(source_path):
-            #     self.run("ctest --build-config {}".format(self.settings.build_type))
 
     def package(self):
         self.copy(pattern="LICENSE", dst="licenses", src=self._source_subfolder)
