@@ -51,7 +51,7 @@ The following command both runs all the steps of the conan file, and publishes t
 | ------------- |:----------------- |:------------:|
 | shared      | False |  [True, False] |
 | fPIC      | True |  [True, False] |
-| build_deprecated      | False |  [True, False] |
+| build_deprecated      | True |  [True, False] |
 | build_tests      | False |  [True, False] |
 | with_rc      | True |  [True, False] |
 | with_utility      | True |  [True, False] |

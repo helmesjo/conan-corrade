@@ -54,7 +54,7 @@ class LibnameConan(ConanFile):
     default_options = {
         "shared": False, 
         "fPIC": True,
-        "build_deprecated": False,
+        "build_deprecated": True,
         "build_tests": False,
         "with_interconnect": True,
         "with_pluginmanager": True,
