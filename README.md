@@ -1,5 +1,5 @@
 [![Download](https://api.bintray.com/packages/helmesjo/public-conan/corrade%3Ahelmesjo/images/download.svg) ](https://bintray.com/helmesjo/public-conan/corrade%3Ahelmesjo/_latestVersion)
-[![Build Status Travis](https://travis-ci.com/helmesjo/conan-corrade.svg?branch=stable%2F2018.10)](https://travis-ci.com/helmesjo/conan-corrade)
+[![Build Status Travis](https://travis-ci.org/helmesjo/conan-corrade.svg?branch=stable%2F2018.10)](https://travis-ci.org/helmesjo/conan-corrade)
 [![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/helmesjo/conan-corrade?branch=stable%2F2018.10&svg=true)](https://ci.appveyor.com/project/helmesjo/conan-corrade)
 
 ## Conan package recipe for [*corrade*](https://magnum.graphics/corrade)
