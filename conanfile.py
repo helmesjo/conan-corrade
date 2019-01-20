@@ -138,6 +138,3 @@ class LibnameConan(ConanFile):
         suffix = '-d' if self.settings.build_type == "Debug" else ''
         builtLibs = tools.collect_libs(self)
         self.cpp_info.libs = sort_libs(correct_order=allLibs, libs=builtLibs, lib_suffix=suffix, reverse_result=True)
-
-        if self.options.build_deprecated:
-            self.cpp_info.defines.append("CORRADE_BUILD_DEPRECATED")
