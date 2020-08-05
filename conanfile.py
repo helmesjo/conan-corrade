@@ -104,7 +104,8 @@ class LibnameConan(ConanFile):
 
         if self.settings.compiler == 'Visual Studio':
             add_cmake_option("MSVC2015_COMPATIBILITY", int(self.settings.compiler.version.value) == 14)
-            add_cmake_option("MSVC2017_COMPATIBILITY", int(self.settings.compiler.version.value) == 17)
+            add_cmake_option("MSVC2017_COMPATIBILITY", int(self.settings.compiler.version.value) == 15)
+            add_cmake_option("MSVC2019_COMPATIBILITY", int(self.settings.compiler.version.value) == 16)
         
         if self.settings.compiler == 'gcc':
             add_cmake_option("GCC47_COMPATIBILITY", float(self.settings.compiler.version.value) < 4.8)
