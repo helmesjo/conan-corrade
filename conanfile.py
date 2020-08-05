@@ -126,8 +126,8 @@ class LibnameConan(ConanFile):
     def package_info(self):
         # See dependency order here: https://doc.magnum.graphics/magnum/custom-buildsystems.html
         allLibs = [
-            "CorradeMain",
             #1
+            "CorradeMain",
             "CorradeUtility",
             "CorradeContainers",
             #2
@@ -142,3 +142,6 @@ class LibnameConan(ConanFile):
         print("Found libs: ", builtLibs)
         self.cpp_info.libs = sort_libs(correct_order=allLibs, libs=builtLibs, lib_suffix=suffix, reverse_result=True)
         print("Link order: ", self.cpp_info.libs)
+        bindir = os.path.join(self.package_folder, "bin")
+        self.output.info("Appending PATH environment variable: {}".format(bindir))
+        self.env_info.PATH.append(bindir)
