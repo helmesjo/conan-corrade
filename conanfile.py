@@ -142,6 +142,10 @@ class LibnameConan(ConanFile):
         print("Found libs: ", builtLibs)
         self.cpp_info.libs = sort_libs(correct_order=allLibs, libs=builtLibs, lib_suffix=suffix, reverse_result=True)
         print("Link order: ", self.cpp_info.libs)
+        
+        if self.settings.os == "Linux":
+            self.cpp_info.system_libs = ["m", "dl"]
+
         bindir = os.path.join(self.package_folder, "bin")
         self.output.info("Appending PATH environment variable: {}".format(bindir))
         self.env_info.PATH.append(bindir)
