@@ -119,11 +119,12 @@ class CorradeConan(ConanFile):
         self.cpp_info.names["cmake_find_package"] = "Corrade"
         self.cpp_info.names["cmake_find_package_multi"] = "Corrade"
 
-        self.cpp_info.builddirs.append(os.path.join("lib", "cmake"))
+        self.cpp_info.includedirs.append("include")
+        self.cpp_info.builddirs.append(os.path.join("lib", "cmake", "Corrade"))
+        self.cpp_info.build_modules.append(os.path.join("lib", "cmake", "Corrade", "FindCorrade.cmake"))
+        self.cpp_info.build_modules.append(os.path.join("lib", "cmake", "Corrade", "CorradeLibSuffix.cmake"))
         self.cpp_info.build_modules.append(os.path.join("lib", "cmake", "Corrade", "CMakeLists.txt"))
         self.cpp_info.build_modules.append(os.path.join("lib", "cmake", "Corrade", "CorradeConfig.cmake"))
-        self.cpp_info.build_modules.append(os.path.join("lib", "cmake", "Corrade", "CorradeLibSuffix.cmake"))
-        self.cpp_info.build_modules.append(os.path.join("lib", "cmake", "Corrade", "FindCorrade.cmake"))
         self.cpp_info.build_modules.append(os.path.join("lib", "cmake", "Corrade", "UseCorrade.cmake"))
 
         # See dependency order here: https://doc.magnum.graphics/magnum/custom-buildsystems.html
@@ -144,8 +145,6 @@ class CorradeConan(ConanFile):
         self.cpp_info.libs = self._sort_libs(allLibs, builtLibs, suffix, True)
         if self.settings.os == "Linux":
             self.cpp_info.system_libs = ["m", "dl"]
-
-        self.cpp_info.builddirs = [os.path.join(self.package_folder, "lib", "cmake", "Corrade")]
 
         bindir = os.path.join(self.package_folder, "bin")
         self.output.info("Appending PATH environment variable: {}".format(bindir))
