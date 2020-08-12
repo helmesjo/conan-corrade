@@ -4,7 +4,7 @@ import os
 
 class CorradeConan(ConanFile):
     name = "corrade"
-    version = "2019.10"
+    version = "2020.06"
     description = "Corrade is a multiplatform utility library written in C++11/C++14."
     topics = ("conan", "corrade", "magnum", "filesystem", "console", "environment", "os")
     url = "https://github.com/conan-io/conan-center-index"
@@ -26,6 +26,7 @@ class CorradeConan(ConanFile):
         "with_pluginmanager": [True, False],
         "with_testsuite": [True, False],
         "with_utility": [True, False],
+        "with_rc": [True, False],
     }
     default_options = {
         "shared": False,
@@ -36,6 +37,7 @@ class CorradeConan(ConanFile):
         "with_pluginmanager": True,
         "with_testsuite": True,
         "with_utility": True,
+        "with_rc": True,
     }
 
     _source_subfolder = "source_subfolder"
@@ -61,23 +63,27 @@ class CorradeConan(ConanFile):
     def _configure_cmake(self):
         if not self._cmake:
             self._cmake = CMake(self)
-            self._cmake.definitions["BUILD_STATIC"] = not self.options.shared
-            self._cmake.definitions["BUILD_DEPRECARED"] = self.options["build_deprecated"]
-            self._cmake.definitions["WITH_INTERCONNECT"] = self.options["with_interconnect"]
-            self._cmake.definitions["WITH_MAIN"] = self.options["with_main"]
-            self._cmake.definitions["WITH_PLUGINMANAGER"] = self.options["with_pluginmanager"]
-            self._cmake.definitions["WITH_TESTSUITE"] = self.options["with_testsuite"]
-            self._cmake.definitions["WITH_UTILITY"] = self.options["with_utility"]
-            self._cmake.definitions["WITH_RC"] = "ON"
+            def add_cmake_option(option, value):
+                var_name = "{}".format(option).upper()
+                value_str = "{}".format(value)
+                var_value = "ON" if value_str == 'True' else "OFF" if value_str == 'False' else value_str 
+                self._cmake.definitions[var_name] = var_value
+                print("{0}={1}".format(var_name, var_value))
 
-            # Corrade uses suffix on the resulting "lib"-folder when running cmake.install()
-            # Set it explicitly to empty, else Corrade might set it implicitly (eg. to "64")
-            self._cmake.definitions["LIB_SUFFIX"] = ""
+            for option, value in self.options.items():
+                add_cmake_option(option, value)
+
+            add_cmake_option("BUILD_STATIC", not self.options.shared)
+            add_cmake_option("BUILD_STATIC_PIC", not self.options.shared and self.options.get_safe("fPIC") == True)
 
             if self.settings.compiler == "Visual Studio":
                 self._cmake.definitions["MSVC2015_COMPATIBILITY"] = "ON" if self.settings.compiler.version == "14" else "OFF"
                 self._cmake.definitions["MSVC2017_COMPATIBILITY"] = "ON" if self.settings.compiler.version == "15" else "OFF"
                 self._cmake.definitions["MSVC2019_COMPATIBILITY"] = "ON" if self.settings.compiler.version == "16" else "OFF"
+
+            # Corrade uses suffix on the resulting "lib"-folder when running cmake.install()
+            # Set it explicitly to empty, else Corrade might set it implicitly (eg. to "64")
+            self._cmake.definitions["LIB_SUFFIX"] = ""
 
             self._cmake.configure(build_folder=self._build_subfolder)
 

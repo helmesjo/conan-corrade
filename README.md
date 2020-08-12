@@ -1,6 +1,6 @@
 [![Download](https://api.bintray.com/packages/helmesjo/public-conan/corrade%3Ahelmesjo/images/download.svg) ](https://bintray.com/helmesjo/public-conan/corrade%3Ahelmesjo/_latestVersion)
-[![Build Status Travis](https://travis-ci.org/helmesjo/conan-corrade.svg?branch=stable%2F2019.10)](https://travis-ci.org/helmesjo/conan-corrade)
-[![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/helmesjo/conan-corrade?branch=stable%2F2019.10&svg=true)](https://ci.appveyor.com/project/helmesjo/conan-corrade)
+[![Build Status Travis](https://travis-ci.org/helmesjo/conan-corrade.svg?branch=stable%2F2020.06)](https://travis-ci.org/helmesjo/conan-corrade)
+[![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/helmesjo/conan-corrade?branch=stable%2F2020.06&svg=true)](https://ci.appveyor.com/project/helmesjo/conan-corrade)
 
 ## Conan package recipe for [*corrade*](https://magnum.graphics/corrade)
 
@@ -20,14 +20,14 @@ If you wish to report an issue or make a request for a Bincrafters package, plea
 
 ### Basic setup
 
-    $ conan install corrade/2019.10@helmesjo/stable
+    $ conan install corrade/2020.06@helmesjo/stable
 
 ### Project setup
 
 If you handle multiple dependencies in your project is better to add a *conanfile.txt*
 
     [requires]
-    corrade/2019.10@helmesjo/stable
+    corrade/2020.06@helmesjo/stable
 
     [generators]
     cmake
@@ -69,4 +69,4 @@ The following command both runs all the steps of the conan file, and publishes t
 NOTE: The conan recipe license applies only to the files of this recipe, which can be used to build and package corrade.
 It does *not* in any way apply or is related to the actual software being packaged.
 
-[MIT](https://github.com/helmesjo/conan-corrade/blob/stable/2019.10/LICENSE.md)
+[MIT](https://github.com/helmesjo/conan-corrade/blob/stable/2020.06/LICENSE.md)
